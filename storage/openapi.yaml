@@ -15,24 +15,19 @@ tags:
 - name: devices
   description: Operations available to a library computer kiosk.
 paths:
+  /health:
+    get:
+      tags:
+        - devices
+      summary: Returns status of the service
+      description: Returns the health status of the service
+      operationId: app.get_health_status
+      responses:
+        '200':
+          description: Service is running
+        '500':
+          description: Service is down
   /book:
-    # post:
-    #   tags:
-    #   - devices
-    #   summary: adds a book hold request
-    #   description: Adds a new book hold request in the system
-    #   operationId: app.add_book_hold
-    #   requestBody:
-    #     description: Book hold request to add
-    #     content:
-    #       application/json:
-    #         schema:
-    #           $ref: '#/components/schemas/BookHold'
-    #   responses:
-    #     "201":
-    #       description: item created
-    #     "400":
-    #       description: "invalid input, object invalid"
     get:
       tags:
       - devices

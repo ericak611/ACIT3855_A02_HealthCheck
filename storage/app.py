@@ -21,15 +21,6 @@ import mysql.connector
 import pymysql
 import os
 
-# with open('log_conf.yml', 'r') as f:
-#     log_config = yaml.safe_load(f.read())
-#     logging.config.dictConfig(log_config)
-
-# logger = logging.getLogger('basicLogger')
-
-# with open('app_conf.yml', 'r') as f:
-#     app_config = yaml.safe_load(f.read())
-
 
 if "TARGET_ENV" in os.environ and os.environ["TARGET_ENV"] == "test":
     print("In Test Environment")
@@ -63,7 +54,9 @@ DB_ENGINE = create_engine(f'mysql+pymysql://{user}:{password}@{hostname}:{port}/
 Base.metadata.bind = DB_ENGINE
 DB_SESSION = sessionmaker(bind=DB_ENGINE)
 
-
+def get_health_status():
+    logger.info("service is running")
+    return 200
 
 def get_book_hold(start_timestamp, end_timestamp):
     """ Gets new book hold requests after the timestamp """

@@ -14,14 +14,6 @@ import json
 from flask_cors import CORS, cross_origin
 import os
 
-# with open('app_conf.yml', 'r') as f:
-#     app_config = yaml.safe_load(f.read())
-    
-# with open('log_conf.yml', 'r') as f:
-#     log_config = yaml.safe_load(f.read())
-#     logging.config.dictConfig(log_config)
-
-# logger = logging.getLogger('basicLogger')
 
 if "TARGET_ENV" in os.environ and os.environ["TARGET_ENV"] == "test":
     print("In Test Environment")
@@ -43,6 +35,10 @@ logging.config.dictConfig(log_config)
 logger = logging.getLogger('basicLogger')
 logger.info("App Conf File: %s" % app_conf_file)
 logger.info("Log Conf File: %s" % log_conf_file)
+
+def get_health_status():
+    logger.info("service is running")
+    return 200
 
 def get_book_hold(index):
     """ Get BP Reading in History """
