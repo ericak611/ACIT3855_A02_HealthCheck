@@ -55,7 +55,8 @@ def update_health_status():
     with open(app_config['datastore']['filename'], 'w') as file:
         json.dump(health_status, file, indent=2)
 
-    logger.info("Retrieved health status of all the services.")        
+    logger.info("Retrieved health status of all the services.")      
+    return health_status, 200  
 
 
 def init_scheduler():
