@@ -4,12 +4,12 @@ datastore:
 scheduler:
   period_sec: 20
 eventstore:
-  url: http://localhost
+  url: acit3855-system.eastus.cloudapp.azure.com
 service:  
-    receiver: :8080/health
-    storage: :8090/health
-    processing: :8100/health
-    audit: :8110/health
+    receiver: /receiver/health
+    storage: /storage/health
+    processing: /processing/health
+    audit: /audit_log/health
 
 
 

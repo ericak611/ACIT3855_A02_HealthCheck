@@ -34,10 +34,6 @@ logger = logging.getLogger('basicLogger')
 logger.info("App Conf File: %s" % app_conf_file)
 logger.info("Log Conf File: %s" % log_conf_file)
 
-def get_health_status():
-    logger.info("service is running")
-    return 200
-
 def populate_stats():
 
     # Log an INFO message 
@@ -139,12 +135,14 @@ def init_scheduler():
 
 app = connexion.FlaskApp(__name__, specification_dir='')
 app.add_api("openapi.yaml",
+            base_path="/processing",
             strict_validation=True,
             validate_responses=True)
 
 if __name__ == "__main__":
-    CORS(app.app)
-    app.app.config['CORS_HEADERS'] = 'Content-Type'
+    if "TARGET_ENV" not in os.environ or os.environ["TARGET_ENV"] != "test":
+        CORS(app.app)
+        app.app.config['CORS_HEADERS'] = 'Content-Type'
     # run our standalone gevent server
     init_scheduler()
     app.run(port=8100, use_reloader=False)
