@@ -1,0 +1,15 @@
+version: 1
+datastore:
+  filename: data.json
+scheduler:
+  period_sec: 20
+eventstore:
+  url: http://localhost
+service:  
+    receiver: :8080/health
+    storage: :8090/health
+    processing: :8100/health
+    audit: :8110/health
+
+
+
