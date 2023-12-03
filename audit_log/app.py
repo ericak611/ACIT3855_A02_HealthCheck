@@ -37,6 +37,10 @@ logger = logging.getLogger('basicLogger')
 logger.info("App Conf File: %s" % app_conf_file)
 logger.info("Log Conf File: %s" % log_conf_file)
 
+def get_health_status():
+    logger.info("service is running")
+    return 200
+
 def get_book_hold(index):
     """ Get BP Reading in History """
     hostname = "%s:%d" % (app_config["events"]["hostname"],

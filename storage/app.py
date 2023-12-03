@@ -53,7 +53,9 @@ DB_ENGINE = create_engine(f'mysql+pymysql://{user}:{password}@{hostname}:{port}/
 Base.metadata.bind = DB_ENGINE
 DB_SESSION = sessionmaker(bind=DB_ENGINE)
 
-
+def get_health_status():
+    logger.info("service is running")
+    return 200
 
 def get_book_hold(start_timestamp, end_timestamp):
     """ Gets new book hold requests after the timestamp """

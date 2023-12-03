@@ -34,6 +34,9 @@ logger = logging.getLogger('basicLogger')
 logger.info("App Conf File: %s" % app_conf_file)
 logger.info("Log Conf File: %s" % log_conf_file)
 
+def get_health_status():
+    logger.info("service is running")
+    return 200
 
 def connect_to_kafka(hostname, app_config):
     retry_count = 0
@@ -63,9 +66,6 @@ producer = connect_to_kafka(
     f"{app_config['events']['hostname']}:{app_config['events']['port']}",
     app_config)
 
-def get_health_status():
-    logger.info("service is running")
-    return 200
 
 def add_book_hold(body): 
     trace_id = str(uuid.uuid4())
@@ -115,6 +115,7 @@ def add_movie_hold(body):
 
 app = connexion.FlaskApp(__name__, specification_dir='')
 app.add_api("openapi.yaml",
+            base_path="/receiver",
             strict_validation=True,
             validate_responses=True)
 
